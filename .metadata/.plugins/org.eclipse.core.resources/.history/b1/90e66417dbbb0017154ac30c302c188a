@@ -1,0 +1,30 @@
+package com.bridgelabz.jdbcPrograms.program;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class PrepareStmtUpdate {
+public static void main(String[] args) {
+	String query="update Employee set employeeName=? where EmployeeId=?";
+	try {
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "ninja");
+		PreparedStatement preparedStatmt = connection.prepareStatement(query);
+	//	PreparedStatement preparedStatmt = connection.prepareStatement(query);
+		preparedStatmt.setString(1, "sonal");
+		preparedStatmt.setInt(2, 1);
+		preparedStatmt.setDouble(3, 26000);
+		preparedStatmt.setString(4, "645847575");
+		int result = preparedStatmt.executeUpdate();
+	int i=	preparedStatmt.executeUpdate();
+	System.out.println("result:"+i);
+	} catch (ClassNotFoundException | SQLException e) {
+	
+		e.printStackTrace();
+	}
+	
+	
+}
+}

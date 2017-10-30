@@ -1,0 +1,23 @@
+package com.bridgelabz.jdbcPrograms.program;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import com.mysql.jdbc.PreparedStatement;
+public class storeImage
+{
+	public static void main(String[] args) {
+		String sql="insert into ImageTable values(1,LOAD_FILE('/home/bridgeit/img.jpeg'))";
+		try 
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "ninja");
+			PreparedStatement pstm=(PreparedStatement) con.prepareStatement(sql);
+			pstm.execute();
+			System.out.println("stored succesfully.....");
+		} 
+		catch (ClassNotFoundException | SQLException e)
+		{
+			e.printStackTrace();
+		}  
+	}
+}

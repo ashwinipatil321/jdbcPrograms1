@@ -1,0 +1,22 @@
+package com.bridgelabz.jdbcPrograms.program;
+
+import java.sql.*;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import com.mysql.jdbc.PreparedStatement;
+
+public class PepareStmtRetriev {
+	public static void main(String[] args) {
+		String string="Select * from Employee";
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "ninja");
+PreparedStatement pstmt =  (PreparedStatement) connection.prepareStatement(string);		
+} catch (ClassNotFoundException | SQLException e) {
+			
+			e.printStackTrace();
+		}
+	}
+
+}

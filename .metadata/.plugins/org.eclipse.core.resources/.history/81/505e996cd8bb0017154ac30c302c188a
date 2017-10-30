@@ -1,0 +1,48 @@
+package com.bridgelabz.jdbcPrograms.program;
+
+import java.sql.*;
+
+public class PreparedStatementProgram {
+	public static void main(String[] args) {
+		String query = "insert into  MySchema.Employee values(?,?,?,?)";
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "ninja");
+			PreparedStatement preparedStatmt = connection.prepareStatement(query);
+			preparedStatmt.setString(1, "Amol");
+			preparedStatmt.setInt(2, 22);
+			preparedStatmt.setDouble(3, 25000);
+			preparedStatmt.setString(4, "1324323553");
+			int result = preparedStatmt.executeUpdate();
+			System.out.println("result "+result);
+		
+			preparedStatmt.setString(1, "komal");
+			preparedStatmt.setInt(2, 10);
+			preparedStatmt.setDouble(3, 10000);
+			preparedStatmt.setString(4, "1265437889");
+			int result1 = preparedStatmt.executeUpdate();
+			System.out.println("result "+result1);
+			
+			preparedStatmt.setString(1, "seema");
+			preparedStatmt.setInt(2, 12);
+			preparedStatmt.setDouble(3, 40000);
+			preparedStatmt.setString(4, "34563276874");
+			int result2 = preparedStatmt.executeUpdate();
+			System.out.println("result "+result2);
+			
+			
+			preparedStatmt.setString(1, "meena");
+			preparedStatmt.setInt(2, 15);
+			preparedStatmt.setDouble(3, 150000);
+			preparedStatmt.setString(4, "234125536");
+			int result3 = preparedStatmt.executeUpdate();
+			System.out.println("result "+result3);
+			
+			
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+	}
+}

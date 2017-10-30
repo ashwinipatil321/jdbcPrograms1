@@ -1,0 +1,72 @@
+package com.bridgelabz.jdbcPrograms.program;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+import com.mysql.jdbc.PreparedStatement;
+import java.sql.*;
+public class TranstionManagementUsingPStmt 
+{
+	public static void main(String[] args) {
+		java.sql.PreparedStatement ps=null;
+		Connection con =null;
+		try{  
+
+			Class.forName("com.mysql.jdbc.Driver");
+			con	=DriverManager.getConnection("jdbc:mysql://localhost:3306/MySchema","root","ninja");
+			con.setAutoCommit(false);  
+
+			ps	=con.prepareStatement("insert into Employee values(?,?,?,?)");  
+
+			BufferedReader br=new BufferedReader(new InputStreamReader(System.in));  
+			while(true){  
+
+				System.out.println("Enter id......");  
+				String s1=br.readLine();  
+				int id=Integer.parseInt(s1);  
+
+				System.out.println("Enter name.....");  
+				String name=br.readLine();  
+
+				System.out.println("Enter salary.....");  
+				String s3=br.readLine();  
+				double salary=Double.parseDouble(s3);
+
+				System.out.println("Enter Mobile Number.....");  
+				String mobileNumber=br.readLine();  
+
+				ps.setString(2,name); 
+				ps.setInt(1,id);  
+				ps.setDouble(3,salary); 
+				ps.setString(4,mobileNumber);
+				ps.executeUpdate();  
+
+				System.out.println("commit/rollback");  
+				String answer=br.readLine();  
+				if(answer.equals("commit"))
+				{  
+					con.commit();  
+				}  
+				if(answer.equals("rollback"))
+				{  
+					con.rollback();  
+				}  
+
+				System.out.println("Want to add more records y/n");  
+				String ans=br.readLine();  
+				if(ans.equals("n")){  
+					break;  
+				}  
+
+			}  
+			con.commit();  
+			System.out.println("record successfully saved");  
+			con.close();
+			ps.close();
+		}
+		catch(Exception e){System.out.println(e);
+		}  
+	}
+}

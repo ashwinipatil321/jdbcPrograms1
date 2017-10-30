@@ -1,0 +1,31 @@
+package com.bridgelabz.jdbcPrograms.program;
+
+import java.sql.*;
+
+public class PreparedStatementProgram {
+	public static void main(String[] args) {
+		String query = "insert into  MySchema.Employee values(?,?,?,?)";
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "ninja");
+			PreparedStatement preparedStatmt = connection.prepareStatement(query);
+			preparedStatmt.setString(1, "Amol");
+			preparedStatmt.setInt(2, 11);
+			preparedStatmt.setDouble(3, 25000);
+			preparedStatmt.setString(4, "67896789778");
+			int result = preparedStatmt.executeUpdate();
+			System.out.println("result "+result);
+			//PreparedStatement preparedStatmt= connection.prepareStatement(query);
+			preparedStatmt.setString(1, "komal");
+			preparedStatmt.setInt(2, 10);
+			preparedStatmt.setDouble(3, 10000);
+			preparedStatmt.setString(4, "1265437889");
+			int result1 = preparedStatmt.executeUpdate();
+			System.out.println("result "+result1);
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+	}
+}
